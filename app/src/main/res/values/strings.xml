@@ -3,10 +3,16 @@
     <!-- Database nodes -->
     <string name="node_users">users</string>
 
+    <!-- Fragment Names -->
+    <string name="fragment_search">Search</string>
+    <string name="fragment_watch_list">Watch List</string>
+    <string name="fragment_post">Post</string>
+    <string name="fragment_account">Account</string>
+    <string name="node_posts">posts</string>
 
+    <!-- Dialog Names -->
+    <string name="dialog_select_photo">SelectPhoto</string>
     <!-- Database field names -->
-
-
 
     <!-- Shared Preferenes -->
 

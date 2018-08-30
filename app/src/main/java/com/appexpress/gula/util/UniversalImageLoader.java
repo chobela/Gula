@@ -3,6 +3,7 @@ package com.appexpress.gula.util;
 import android.content.Context;
 import android.widget.ImageView;
 
+import com.appexpress.gula.PostFragment;
 import com.appexpress.gula.R;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -14,7 +15,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 public class UniversalImageLoader {
 
     private static final int defaultImage = R.drawable.ic_android;
-    private Context mContext;
+    public static Context mContext;
 
     public UniversalImageLoader(Context context) {
         mContext = context;
@@ -49,6 +50,11 @@ public class UniversalImageLoader {
     public static void setImage(String imgURL, ImageView image){
 
         ImageLoader imageLoader = ImageLoader.getInstance();
+
+        imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
+
         imageLoader.displayImage(imgURL, image);
     }
+
+
 }
