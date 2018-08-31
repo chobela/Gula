@@ -25,6 +25,7 @@
         <activity android:name=".SearchActivity" />
 
         <activity android:name=".account.RegisterActivity"/>
+        <activity android:name=".FiltersActivity"/>
     </application>
 
 </manifest>

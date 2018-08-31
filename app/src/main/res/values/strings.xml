@@ -9,6 +9,7 @@
     <string name="fragment_post">Post</string>
     <string name="fragment_account">Account</string>
     <string name="node_posts">posts</string>
+    <string name="preferences_city">preferences_city</string>
 
     <!-- Dialog Names -->
     <string name="dialog_select_photo">SelectPhoto</string>

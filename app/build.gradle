@@ -49,5 +49,8 @@ dependencies {
     //ExifInterface support
     implementation "com.android.support:exifinterface:27.+"
 
+    //recyclerview
+    implementation 'com.android.support:recyclerview-v7:27.+'
+
 }
 apply plugin: 'com.google.gms.google-services'
