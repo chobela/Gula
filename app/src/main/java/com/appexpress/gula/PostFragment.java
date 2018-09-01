@@ -115,7 +115,7 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
                         && !isEmpty(mPrice.getText().toString())
                         && !isEmpty(mPhone.getText().toString())
                         && !isEmpty(mCity.getText().toString())
-                        && !isEmpty(mPhone.getText().toString())
+                     
                         && !isEmpty(mContactEmail.getText().toString())){
 
                     //we have a bitmap and no Uri

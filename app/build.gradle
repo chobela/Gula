@@ -52,5 +52,11 @@ dependencies {
     //recyclerview
     implementation 'com.android.support:recyclerview-v7:27.+'
 
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    //retrofit gson lib
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
 }
 apply plugin: 'com.google.gms.google-services'

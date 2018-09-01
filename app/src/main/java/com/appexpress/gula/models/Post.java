@@ -95,11 +95,11 @@ public class Post {
     }
 
     public String getPhone() {
-        return price;
+        return phone;
     }
 
     public void setPhone(String price) {
-        this.price = price;
+        this.price = phone;
     }
 
 
@@ -114,6 +114,7 @@ public class Post {
                 ", city='" + city + '\'' +
                 ", contact_email='" + contact_email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", price='" + price + '\'' +
                 '}';
     }
 }
