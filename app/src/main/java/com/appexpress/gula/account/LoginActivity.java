@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appexpress.gula.Featured;
 import com.appexpress.gula.R;
 import com.appexpress.gula.SearchActivity;
 import com.appexpress.gula.util.UniversalImageLoader;
@@ -161,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(TAG, "onAuthStateChanged: signed_in: " + user.getUid());
                         Toast.makeText(LoginActivity.this, "Authenticated with: " + user.getEmail(), Toast.LENGTH_SHORT).show();
 
-                        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, Featured.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();

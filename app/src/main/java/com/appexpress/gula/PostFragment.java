@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,14 +21,9 @@ import android.widget.Toast;
 import com.appexpress.gula.models.Post;
 import com.appexpress.gula.util.RotateBitmap;
 import com.appexpress.gula.util.UniversalImageLoader;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.appexpress.gula.util.Upload;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,12 +31,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoSelectedListener {
 
@@ -195,8 +187,10 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
             //execute the upload task
 
             executeUploadTask();
+
         }
     }
+
 
     private void executeUploadTask(){
         Toast.makeText(getActivity(), "uploading image", Toast.LENGTH_SHORT).show();
@@ -219,20 +213,34 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
                 Log.d(TAG, "onSuccess: firebase download url: " + firebaseUri.toString());
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
+                String image = firebaseUri.toString();
+                String town= mCity.getText().toString();
+                String email= mContactEmail.getText().toString();
+                String phone= mPhone.getText().toString();
+                String description= mDescription.getText().toString();
+                String price= mPrice.getText().toString();
+                String title= mTitle.getText().toString();
+
                 Post post = new Post();
-                post.setImage(firebaseUri.toString());
-                post.setCity(mCity.getText().toString());
-                post.setContact_email(mContactEmail.getText().toString());
-                post.setPhone(mPhone.getText().toString());
-                post.setDescription(mDescription.getText().toString());
+                post.setImage(image);
+                post.setCity(town);
+                post.setContact_email(email);
+                post.setPhone(phone);
+                post.setDescription(description);
                 post.setPost_id(postId);
-                post.setPrice(mPrice.getText().toString());
-                post.setTitle(mTitle.getText().toString());
+                post.setPrice(price);
+                post.setTitle(title);
                 post.setUser_id(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+                new Upload(getContext()).execute(image, town, email, phone, description, postId, price, title, FirebaseAuth.getInstance().getCurrentUser().getUid());
+
 
                 reference.child(getString(R.string.node_posts))
                         .child(postId)
                         .setValue(post);
+
+
 
                 resetFields();
             }
@@ -252,6 +260,8 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
                 }
             }
         });
+
+
     }
 
     public static byte[] getBytesFromBitmap(Bitmap bitmap, int quality){
@@ -263,7 +273,7 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
 
     private void resetFields(){
 
-        UniversalImageLoader.setImage("", mPostImage);
+       // UniversalImageLoader.setImage("", mPostImage);
 
         mTitle.setText("");
         mDescription.setText("");
@@ -293,4 +303,6 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
         return string.equals("");
     }
 
+
 }
+

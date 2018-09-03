@@ -29,7 +29,6 @@
     <string name="field_post_id">post_id</string>
 
 
-
     <!-- Shared Preferenes -->
 
     <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -45,5 +44,6 @@
         remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
         sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
         like Aldus PageMaker including versions of Lorem Ipsum</string>
+    <string name="title_activity_featured">Featured</string>
 
 </resources>

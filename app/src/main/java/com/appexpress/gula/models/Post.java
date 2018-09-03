@@ -99,7 +99,7 @@ public class Post {
     }
 
     public void setPhone(String phone) {
-        this.price = phone;
+        this.phone = phone;
     }
 
 
@@ -111,10 +111,10 @@ public class Post {
                 ", image='" + image + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", price='" + price + '\'' +
                 ", city='" + city + '\'' +
                 ", contact_email='" + contact_email + '\'' +
                 ", phone='" + phone + '\'' +
-                ", price='" + price + '\'' +
                 '}';
     }
 }
