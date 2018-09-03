@@ -98,7 +98,7 @@ public class Post {
         return phone;
     }
 
-    public void setPhone(String price) {
+    public void setPhone(String phone) {
         this.price = phone;
     }
 

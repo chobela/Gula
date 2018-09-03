@@ -50,9 +50,6 @@ public class UniversalImageLoader {
     public static void setImage(String imgURL, ImageView image){
 
         ImageLoader imageLoader = ImageLoader.getInstance();
-
-        imageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
-
         imageLoader.displayImage(imgURL, image);
     }
 

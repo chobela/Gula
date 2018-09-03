@@ -22,9 +22,14 @@ import android.widget.Toast;
 import com.appexpress.gula.models.Post;
 import com.appexpress.gula.util.RotateBitmap;
 import com.appexpress.gula.util.UniversalImageLoader;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,6 +42,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoSelectedListener {
 
@@ -208,7 +214,7 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
                 Toast.makeText(getActivity(), "Post Success", Toast.LENGTH_SHORT).show();
 
                 //insert the download url into the firebase database
-                Task<Uri> firebaseUri = storageReference.getDownloadUrl();
+                Uri firebaseUri = taskSnapshot.getDownloadUrl();
 
                 Log.d(TAG, "onSuccess: firebase download url: " + firebaseUri.toString());
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
@@ -216,8 +222,8 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
                 Post post = new Post();
                 post.setImage(firebaseUri.toString());
                 post.setCity(mCity.getText().toString());
-                post.setPhone(mPhone.getText().toString());
                 post.setContact_email(mContactEmail.getText().toString());
+                post.setPhone(mPhone.getText().toString());
                 post.setDescription(mDescription.getText().toString());
                 post.setPost_id(postId);
                 post.setPrice(mPrice.getText().toString());

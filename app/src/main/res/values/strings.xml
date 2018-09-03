@@ -10,15 +10,24 @@
     <string name="fragment_account">Account</string>
     <string name="node_posts">posts</string>
     <string name="preferences_city">preferences_city</string>
-
+    <string name="fragment_view_post">Post</string>
     <!-- Dialog Names -->
     <string name="dialog_select_photo">SelectPhoto</string>
     <!-- Database field names -->
     <string name="node_elasticsearch">elasticsearch</string>
+    <!-- Intent extras and Bundle arguments -->
+    <string name="arg_post_id">arg_post_id</string>
+
+    <!-- Database field names -->
+
+    <string name="node_watch_list">watch_list</string>
 
 
     <!-- Database field names -->
     <string name="field_password">password</string>
+    <string name="field_user_id">user_id</string>
+    <string name="field_post_id">post_id</string>
+
 
 
     <!-- Shared Preferenes -->
