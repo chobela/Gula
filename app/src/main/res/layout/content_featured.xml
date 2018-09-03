@@ -9,12 +9,18 @@
     tools:context=".Featured"
     tools:showIn="@layout/activity_featured">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ProgressBar
         android:layout_centerInParent="true"
-        android:background="@color/blue1"/>
+        android:id="@+id/progress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        xmlns:android="http://schemas.android.com/apk/res/android" />
 
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

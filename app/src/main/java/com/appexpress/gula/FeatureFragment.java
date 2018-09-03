@@ -30,9 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class ViewPostFragment extends Fragment {
+public class FeatureFragment extends Fragment {
 
-    private static final String TAG = "ViewPostFragment";
+    private static final String TAG = "FeatureFragment";
 
     //widgets
     private TextView mContactSeller, mTitle, mDescription, mPrice, mLocation, mSavePost;
@@ -65,7 +65,7 @@ public class ViewPostFragment extends Fragment {
 
         init();
 
-        hideSoftKeyboard();
+      //  hideSoftKeyboard();
 
         return view;
     }
@@ -73,15 +73,6 @@ public class ViewPostFragment extends Fragment {
     private void init(){
         getPostInfo();
 
-        //view the post in more detail
-        Fragment fragment = (Fragment)((SearchActivity)getActivity()).getSupportFragmentManager()
-                .findFragmentByTag("android:switcher:" + R.id.viewpager_container + ":" +
-                        ((SearchActivity)getActivity()).mViewPager.getCurrentItem());
-        if(fragment != null){
-            //SearchFragment (AKA #0)
-            if(fragment.getTag().equals("android:switcher:" + R.id.viewpager_container + ":0")){
-                Log.d(TAG, "onClick: switching to: " + getActivity().getString(R.string.fragment_view_post));
-
                 mSavePost.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -95,30 +86,6 @@ public class ViewPostFragment extends Fragment {
                         addItemToWatchList();
                     }
                 });
-
-            }
-            //WatchList Fragment (AKA #1)
-            else if(fragment.getTag().equals("android:switcher:" + R.id.viewpager_container + ":1")){
-                Log.d(TAG, "onClick: switching to: " + getActivity().getString(R.string.fragment_watch_list));
-
-                mSavePost.setText("remove post");
-                mSavePost.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        removeItemFromWatchList();
-                        getActivity().getSupportFragmentManager().popBackStack();
-                    }
-                });
-
-                mWatchList.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        removeItemFromWatchList();
-                        getActivity().getSupportFragmentManager().popBackStack();
-                    }
-                });
-            }
-        }
 
         mContactSeller.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,18 +126,7 @@ public class ViewPostFragment extends Fragment {
         Toast.makeText(getActivity(), "Added to watch list", Toast.LENGTH_SHORT).show();
     }
 
-    private void removeItemFromWatchList(){
-        Log.d(TAG, "removeItemFromWatchList: removing item from watch list.");
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
-        reference.child(getString(R.string.node_watch_list))
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(mPostId)
-                .removeValue();
-
-        Toast.makeText(getActivity(), "Removed from watch list", Toast.LENGTH_SHORT).show();
-    }
 
     private void getPostInfo(){
         Log.d(TAG, "getPostInfo: getting the post information.");

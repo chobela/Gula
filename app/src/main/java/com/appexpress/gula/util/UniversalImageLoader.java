@@ -14,7 +14,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 public class UniversalImageLoader {
 
-    private static final int defaultImage = R.drawable.ic_android;
+    private static final int defaultImage = R.drawable.placeholder;
     public static Context mContext;
 
     public UniversalImageLoader(Context context) {

@@ -69,7 +69,7 @@
                     android:textStyle="bold"
                     android:id="@+id/post_title"
                     android:textColor="@color/Black"
-                    android:text="Item"
+                    android:text="Loading.."
                     android:padding="10dp"
                     android:background="@color/White"/>
 
@@ -87,7 +87,6 @@
                         android:textSize="15sp"
                         android:id="@+id/post_description"
                         android:textColor="@color/Black"
-                        android:text="Description"
                         android:padding="10dp"/>
 
                     <TextView
@@ -96,7 +95,6 @@
                         android:textSize="15sp"
                         android:id="@+id/post_price"
                         android:textColor="@color/Black"
-                        android:text="Price"
                         android:layout_below="@+id/post_description"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="10dp"
@@ -108,7 +106,6 @@
                         android:textSize="15sp"
                         android:id="@+id/post_location"
                         android:textColor="@color/Black"
-                        android:text="Town"
                         android:layout_below="@+id/post_price"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"/>
