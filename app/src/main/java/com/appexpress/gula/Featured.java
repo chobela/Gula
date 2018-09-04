@@ -19,6 +19,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.appexpress.gula.util.RecyclerViewAdapter;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +44,7 @@ public class Featured extends AppCompatActivity {
     List<Deals> Deals;
     ProgressBar progressBar;
     String GET_JSON_DATA_HTTP_URL = "http://ksmr.000webhostapp.com/gula/getdeals.php";
+    private AdView mAdView;
 
     public static final String IMAGE = "image";
     public static final String TOWN = "town";
@@ -54,6 +61,11 @@ public class Featured extends AppCompatActivity {
         setContentView(R.layout.activity_featured);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("NEWS");
+        // initialize the AdMob app
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+
 
         progressBar =  findViewById(R.id.progress);
 
@@ -80,7 +92,69 @@ public class Featured extends AppCompatActivity {
                 transaction.commit();
             }
         });
+
+        mAdView = (AdView) findViewById(R.id.adView);
+       // mAdView.setAdSize(AdSize.BANNER);
+        //mAdView.setAdUnitId(getString(R.string.banner_home_footer));
+
+        AdRequest adRequest = new AdRequest.Builder()
+
+                .build();
+
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+            }
+
+            @Override
+            public void onAdClosed() {
+                Toast.makeText(getApplicationContext(), "Ad is closed!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Toast.makeText(getApplicationContext(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                Toast.makeText(getApplicationContext(), "Ad left application!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdOpened() {
+                super.onAdOpened();
+            }
+        });
+
+        mAdView.loadAd(adRequest);
     }
+
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
+    }
+
 
     public void JSON_DATA_WEB_CALL(){
 

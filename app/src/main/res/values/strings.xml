@@ -19,7 +19,8 @@
     <string name="arg_post_id">arg_post_id</string>
 
     <!-- Database field names -->
-
+    <string name="admob_app_id">ca-app-pub-4644264986800501~3274565999</string>
+    <string name="banner_home_footer">ca-app-pub-3247017110536723/1719933485</string>
     <string name="node_watch_list">watch_list</string>
 
 
@@ -45,5 +46,6 @@
         sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
         like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="title_activity_featured">Featured</string>
+    <string name="title_activity_messages">Messages</string>
 
 </resources>
