@@ -1,16 +1,26 @@
 package com.appexpress.gula;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -18,6 +28,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.appexpress.gula.util.Config;
+import com.appexpress.gula.util.NotificationUtils;
 import com.appexpress.gula.util.RecyclerViewAdapter;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -33,8 +45,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.leolin.shortcutbadger.ShortcutBadger;
+
 
 public class Featured extends AppCompatActivity {
+
+    private static final String TAG = Featured.class.getSimpleName();
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager recyclerViewlayoutManager;
@@ -45,6 +61,10 @@ public class Featured extends AppCompatActivity {
     ProgressBar progressBar;
     String GET_JSON_DATA_HTTP_URL = "http://ksmr.000webhostapp.com/gula/getdeals.php";
     private AdView mAdView;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    private TextView txtRegId, txtMessage;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     public static final String IMAGE = "image";
     public static final String TOWN = "town";
@@ -62,7 +82,16 @@ public class Featured extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FirebaseMessaging.getInstance().subscribeToTopic("NEWS");
+        sharedPreferences = getSharedPreferences("badgeCount", 0);
+        editor = sharedPreferences.edit();
+        editor.putInt("badgeCountValue", 0);
+        editor.commit();
+        ShortcutBadger.removeCount(getApplicationContext());
+
+
+        txtRegId = (TextView) findViewById(R.id.txt_reg_id);
+        txtMessage = (TextView) findViewById(R.id.txt_push_message);
+
         // initialize the AdMob app
         MobileAds.initialize(this, getString(R.string.admob_app_id));
 
@@ -129,6 +158,38 @@ public class Featured extends AppCompatActivity {
         });
 
         mAdView.loadAd(adRequest);
+
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // gcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    FirebaseMessaging.getInstance().subscribeToTopic(Config.TOPIC_GLOBAL);
+
+                    displayFirebaseRegId();
+
+                }
+            }
+        };
+        displayFirebaseRegId();
+    }
+
+
+    private void displayFirebaseRegId() {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
+        String regId = pref.getString("regId", null);
+
+        Log.e(TAG, "Firebase reg id: " + regId);
+
+        if (!TextUtils.isEmpty(regId))
+            txtRegId.setText("Firebase Reg Id: " + regId);
+        else
+            txtRegId.setText("Firebase Reg Id is not received yet!");
+
+
     }
 
     @Override
@@ -145,6 +206,18 @@ public class Featured extends AppCompatActivity {
         if (mAdView != null) {
             mAdView.resume();
         }
+
+ // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+
+        // clear the notification area when the app is opened
+        NotificationUtils.clearNotifications();
     }
 
     @Override

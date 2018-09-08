@@ -9,6 +9,25 @@
     tools:context=".Featured"
     tools:showIn="@layout/activity_featured">
 
+    <TextView
+        android:id="@+id/txt_push_message"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:textColor="@color/colorPrimary"
+        android:textSize="26dp"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/txt_reg_id"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        />
+
     <ProgressBar
         android:layout_centerInParent="true"
         android:id="@+id/progress"
