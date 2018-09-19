@@ -64,15 +64,14 @@
             android:name="com.google.android.gms.ads.com.appexpress.gula"
             android:value="ca-app-pub-3247017110536723/1719933485" />
 
-
-
         <activity
             android:name=".Messages"
             android:label="@string/title_activity_messages"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="MESSAGE"></action>
-                <category android:name="android.intent.category.DEFAULT"></category>
+                <action android:name="MESSAGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
@@ -92,7 +91,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-
+        <activity android:name=".WelcomeActivity"></activity>
     </application>
 
 </manifest>

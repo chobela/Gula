@@ -30,6 +30,21 @@
     <string name="field_post_id">post_id</string>
 
 
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Advertise!</string>
+    <string name="slide_1_desc">Advertise and sell your products for free on Gula!</string>
+
+    <string name="slide_2_title">Search</string>
+    <string name="slide_2_desc">Search for various products to buy instantly!</string>
+
+    <string name="slide_3_title">Buy</string>
+    <string name="slide_3_desc">Contact the seller and buy your product through the app!!</string>
+
+
     <!-- Shared Preferenes -->
 
     <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting
