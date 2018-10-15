@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.appexpress.gula.FeatureFragment;
@@ -26,6 +27,7 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     Context context;
+    private static final int NUM_GRID_COLUMNS = 3;
 
     List<Deals> deals;
 
@@ -52,17 +54,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         final Deals mydeals =  deals.get(position);
 
-        holder.textViewPrice.setText(mydeals.getPrice());
-        holder.textViewTitle.setText(mydeals.getTitle());
-        holder.textViewTown.setText(mydeals.getTown());
+        UniversalImageLoader.setImage(deals.get(position).getImage(), holder.imageView);
 
-        Glide.with(context).load(mydeals.getImage())
+      //  holder.textViewPrice.setText("K " + mydeals.getPrice());
+       // holder.textViewTitle.setText(mydeals.getTitle());
+        //holder.textViewTown.setText(mydeals.getTown());
+
+       /* Glide.with(context).load(mydeals.getImage())
+                .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.imageView);
+                .into(holder.imageView);*/
 
 
 
-        holder.shareBtn.setOnClickListener(new View.OnClickListener() {
+       /* holder.shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -81,7 +86,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
             }
 
-        });
+        });*/
 
         holder.lview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,19 +121,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         TextView textViewTitle, textViewTown, textViewPrice;
         ImageView imageView, shareBtn;
-        LinearLayout lview;
+        RelativeLayout lview;
 
 
         public ViewHolder(View itemView) {
 
             super(itemView);
 
-            textViewPrice = itemView.findViewById(R.id.price) ;
-            textViewTitle = itemView.findViewById(R.id.title) ;
-            textViewTown = itemView.findViewById(R.id.town) ;
+            //textViewPrice = itemView.findViewById(R.id.price) ;
+            //textViewTitle = itemView.findViewById(R.id.title) ;
+            //textViewTown = itemView.findViewById(R.id.town) ;
             imageView = itemView.findViewById(R.id.imageq);
-            shareBtn = itemView.findViewById(R.id.shareme);
+            //shareBtn = itemView.findViewById(R.id.shareme);
             lview = itemView.findViewById(R.id.itemm);
+
+            int gridWidth = context.getResources().getDisplayMetrics().widthPixels;
+            int imageWidth = gridWidth/NUM_GRID_COLUMNS;
+            imageView.setMaxHeight(imageWidth);
+            imageView.setMaxWidth(imageWidth);
 
         }
 

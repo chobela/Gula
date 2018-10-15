@@ -1,92 +1,14 @@
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardview1"
-    android:layout_width="match_parent"
+<RelativeLayout android:id="@+id/itemm"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+            <com.appexpress.gula.util.SquareImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageq"
+                android:scaleType="centerCrop"
+                android:layout_centerInParent="true"/>
 
-    <LinearLayout
-        android:id="@+id/itemm"
-        android:orientation="horizontal" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:weightSum="4"
-        >
-
-        <LinearLayout
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:padding="4dp"
-                android:id="@+id/imageq" />
-
-            <LinearLayout
-                android:paddingTop="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="3dp">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="12dp"
-                    android:paddingTop="5dp"
-                    android:textStyle="bold"
-                    android:id="@+id/title"
-                    android:paddingLeft="4dp"
-                    />
-
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="MUlungushi Village"
-                    android:textSize="10dp"
-                    android:paddingTop="10dp"
-                    android:id="@+id/town"
-                    android:paddingLeft="4dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5000"
-                    android:textSize="10dp"
-                    android:paddingTop="10dp"
-                    android:id="@+id/price"
-                    android:paddingLeft="4dp"
-                    />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_share_black_24dp"
-                android:id="@+id/shareme"
-                android:layout_marginTop="40dp"
-                android:onClick="onClick"/>
-        </LinearLayout>
-    </LinearLayout>
-
-</android.support.v7.widget.CardView>
+    </RelativeLayout>

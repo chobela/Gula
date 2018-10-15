@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -13,11 +14,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +35,7 @@ import com.android.volley.toolbox.Volley;
 import com.appexpress.gula.util.Config;
 import com.appexpress.gula.util.NotificationUtils;
 import com.appexpress.gula.util.RecyclerViewAdapter;
+import com.appexpress.gula.util.RecyclerViewMargin;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -65,6 +70,9 @@ public class Featured extends AppCompatActivity {
     private TextView txtRegId, txtMessage;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+    private static final int NUM_GRID_COLUMNS = 3;
+    private static final int GRID_ITEM_MARGIN = 5;
 
     public static final String IMAGE = "image";
     public static final String TOWN = "town";
@@ -110,7 +118,7 @@ public class Featured extends AppCompatActivity {
 
         JSON_DATA_WEB_CALL();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +128,7 @@ public class Featured extends AppCompatActivity {
                 transaction.replace(R.id.container, fragment);
                 transaction.commit();
             }
-        });
+        });*/
 
         mAdView = (AdView) findViewById(R.id.adView);
        // mAdView.setAdSize(AdSize.BANNER);
@@ -290,6 +298,11 @@ public class Featured extends AppCompatActivity {
             hideProgressBar();
         }
 
+        RecyclerViewMargin itemDecorator = new RecyclerViewMargin(GRID_ITEM_MARGIN, NUM_GRID_COLUMNS);
+        recyclerView.addItemDecoration(itemDecorator);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, NUM_GRID_COLUMNS);
+        recyclerView.setLayoutManager(gridLayoutManager);
+
         recyclerViewadapter = new RecyclerViewAdapter(Deals, this);
 
         recyclerView.setAdapter(recyclerViewadapter);
@@ -305,6 +318,66 @@ public class Featured extends AppCompatActivity {
         if(progressBar.getVisibility() == View.VISIBLE){
             progressBar.setVisibility(View.INVISIBLE);
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.search) {
+            recyclerView.setVisibility(View.GONE);
+            SearchFragment fragment = new SearchFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
+
+
+        } else if (id == R.id.adv) {
+            recyclerView.setVisibility(View.GONE);
+            PostFragment fragment = new PostFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
+
+        }
+
+        else if (id == R.id.watchlist) {
+            recyclerView.setVisibility(View.GONE);
+            WatchListFragment fragment = new  WatchListFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, fragment);
+            transaction.commit();
+        }
+
+        else if (id == R.id.rate) {
+            String recepientEmail = "developer@app-express.net"; // either set to destination email or leave empty
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:" + recepientEmail));
+            startActivity(intent);
+        }
+        else if (id == R.id.feedback) {
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=" + this.getPackageName())));
+            } catch (android.content.ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + this.getPackageName())));
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

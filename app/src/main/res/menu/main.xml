@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/search"
+        android:icon="@drawable/baseline_search_white_24"
+        app:showAsAction="always"
+        android:title="Search"/>
+
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/adv"
+        app:showAsAction="never"
+        android:title="Advertise"
+    />
+
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/watchlist"
+        app:showAsAction="never"
+        android:title="Watchlist"/>
+
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/rate"
+        app:showAsAction="never"
+        android:title="Rate this app"/>
+
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/feedback"
+        app:showAsAction="never"
+        android:title="Feedback"/>
+
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/signout"
+        app:showAsAction="never"
+        android:title="Sign Out"/>
+
+</menu>
