@@ -128,7 +128,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             super(itemView);
 
-            //textViewPrice = itemView.findViewById(R.id.price) ;
+            textViewPrice = itemView.findViewById(R.id.price) ;
             //textViewTitle = itemView.findViewById(R.id.title) ;
             //textViewTown = itemView.findViewById(R.id.town) ;
             imageView = itemView.findViewById(R.id.imageq);

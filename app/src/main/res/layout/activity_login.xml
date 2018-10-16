@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".account.LoginActivity">
+    tools:context=".account.LoginActivity"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,6 +25,8 @@
 
 
         <EditText
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -34,6 +37,8 @@
 
 
         <EditText
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -62,7 +67,7 @@
             android:gravity="center"
             android:textSize="16dp"
             android:id="@+id/link_register"
-            android:textColor="@color/blue1"/>
+            android:textColor="@color/White"/>
 
     </LinearLayout>
 

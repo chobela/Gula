@@ -9,18 +9,59 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:background="@color/colorPrimary"
+            android:id="@+id/toolbarlayout">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:visibility="gone"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+            <ImageView
+                android:id="@+id/menu_icon"
+                android:layout_width="50dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@drawable/ic_menu"
+                android:padding="13dp"
+                android:layout_centerVertical="true"
+
+                />
+            <TextView
+                android:id="@+id/title_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:text="Gula" />
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="50dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@android:drawable/ic_menu_search"
+                android:padding="13dp"
+                android:layout_alignParentRight="true"
+
+                />
+
+        </RelativeLayout>
+
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_featured" />
+   <!-- <include layout="@layout/content_featured" />-->
 
    <!-- <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

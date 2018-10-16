@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +35,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.appexpress.gula.account.LoginActivity;
 import com.appexpress.gula.util.Config;
+import com.appexpress.gula.util.MenuFragment;
 import com.appexpress.gula.util.NotificationUtils;
 import com.appexpress.gula.util.RecyclerViewAdapter;
 import com.appexpress.gula.util.RecyclerViewMargin;
@@ -42,6 +47,8 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,9 +60,14 @@ import java.util.List;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 
-public class Featured extends AppCompatActivity {
+public class Featured extends BaseActivity {
 
     private static final String TAG = Featured.class.getSimpleName();
+
+    boolean isFragmentLoaded;
+    Fragment menuFragment;
+    TextView title;
+    ImageView menuButton, searchButton;
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager recyclerViewlayoutManager;
@@ -71,7 +83,7 @@ public class Featured extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-    private static final int NUM_GRID_COLUMNS = 3;
+    private static final int NUM_GRID_COLUMNS = 2;
     private static final int GRID_ITEM_MARGIN = 5;
 
     public static final String IMAGE = "image";
@@ -86,9 +98,44 @@ public class Featured extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_featured);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initAddlayout(R.layout.content_featured);
+
+        title = (TextView) findViewById(R.id.title_top);
+        menuButton = (ImageView) findViewById(R.id.menu_icon);
+        searchButton = (ImageView) findViewById(R.id.search_icon);
+
+        title.setText("Gula");
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!isFragmentLoaded) {
+                    loadFragment();
+                    title.setText("Gula");
+                }
+                else {
+                    if (menuFragment != null) {
+                        if (menuFragment.isAdded()) {
+                            hideFragment();
+                        }
+                    }
+                }
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(Featured.this, SearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(Featured.this));
 
         sharedPreferences = getSharedPreferences("badgeCount", 0);
         editor = sharedPreferences.edit();
@@ -337,11 +384,8 @@ public class Featured extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.search) {
-            recyclerView.setVisibility(View.GONE);
-            SearchFragment fragment = new SearchFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.container, fragment);
-            transaction.commit();
+            Intent intent = new Intent(Featured.this, SearchActivity.class);
+            startActivity(intent);
 
 
         } else if (id == R.id.adv) {
@@ -349,6 +393,7 @@ public class Featured extends AppCompatActivity {
             PostFragment fragment = new PostFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, fragment);
+
             transaction.commit();
 
         }
@@ -392,5 +437,33 @@ public class Featured extends AppCompatActivity {
             getFragmentManager().popBackStack();
         }
 
+    }
+
+    public void hideFragment(){
+        Featured.this.findViewById(R.id.recyclerView).setVisibility(View.VISIBLE);
+        Featured.this.findViewById(R.id.adView).setVisibility(View.VISIBLE);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.slide_down, R.anim.slide_up);
+        fragmentTransaction.remove(menuFragment);
+        fragmentTransaction.commit();
+        menuButton.setImageResource(R.drawable.ic_menu);
+        isFragmentLoaded = false;
+        title.setText("Gula");
+    }
+    public void loadFragment(){
+        FragmentManager fm = getSupportFragmentManager();
+        menuFragment = fm.findFragmentById(R.id.container);
+        menuButton.setImageResource(R.drawable.ic_up_arrow);
+        if(menuFragment == null){
+            Featured.this.findViewById(R.id.recyclerView).setVisibility(View.GONE);
+            Featured.this.findViewById(R.id.adView).setVisibility(View.GONE);
+            menuFragment = new MenuFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.slide_down, R.anim.slide_up);
+            fragmentTransaction.add(R.id.container,menuFragment);
+            fragmentTransaction.commit();
+        }
+
+        isFragmentLoaded = true;
     }
 }
