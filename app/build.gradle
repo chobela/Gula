@@ -47,15 +47,15 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.google.firebase:firebase-core:10.2.1'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
     //Universal image loader
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     //Firebase Authentication
-    implementation 'com.google.firebase:firebase-auth:10.2.1'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
     //Cloud Firestore
-    implementation 'com.google.firebase:firebase-database:10.2.1'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
     //Firebase Storage
-    implementation 'com.google.firebase:firebase-storage:10.2.1'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
     //ExifInterface support
     implementation 'com.android.support:exifinterface:27.+'
     //recyclerview
@@ -71,10 +71,14 @@ dependencies {
     //Cardview
     implementation 'com.android.support:cardview-v7:27.+'
     //Admob
-    implementation 'com.google.android.gms:play-services-ads:10.2.1'
+    implementation 'com.google.android.gms:play-services-ads:11.8.0'
     //firebae messaging
-    implementation 'com.google.firebase:firebase-messaging:10.2.1'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+
+    implementation 'com.google.android.gms:play-services-auth:11.8.0'
     //shortcut badger
     implementation "me.leolin:ShortcutBadger:1.1.22@aar"
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }
 apply plugin: 'com.google.gms.google-services'

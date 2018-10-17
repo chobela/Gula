@@ -8,23 +8,26 @@
     tools:context=".account.LoginActivity"
     android:background="@color/colorPrimary">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingTop="55dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
+        android:paddingLeft="45dp"
+        android:paddingRight="45dp"
         >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="75dp"
-            android:layout_gravity="center_horizontal"
+
+           android:layout_centerHorizontal="true"
             android:id="@+id/logo"/>
 
 
         <EditText
+            android:visibility="invisible"
+            android:layout_below="@+id/logo"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:layout_width="match_parent"
@@ -37,6 +40,8 @@
 
 
         <EditText
+            android:visibility="invisible"
+            android:layout_below="@+id/input_email"
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:layout_width="match_parent"
@@ -47,34 +52,87 @@
             android:layout_marginTop="15dp"/>
 
 
-
-
-        <Button
+        <com.google.android.gms.common.SignInButton
+            android:layout_below="@+id/input_password"
+            android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
+        <Button
+            android:visibility="invisible"
+            android:layout_below="@+id/input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="25dp"
             android:text="Login"
             android:id="@+id/btn_login"
             android:padding="12dp"
             android:background="@drawable/white_onclick_grey"/>
 
+
+        <Button
+           android:layout_below="@+id/sign_in_button"
+            android:visibility="visible"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:text="Sign in with Email"
+            android:textColor="#ffffff"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:id="@+id/emaillogin"
+            android:padding="12dp"
+            android:background="@color/colorAccent"/>
+
+
+
         <TextView
+            android:visibility="invisible"
+            android:layout_below="@id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:text="Register"
+            android:text="@string/create"
             android:gravity="center"
             android:textSize="16dp"
             android:id="@+id/link_register"
             android:textColor="@color/White"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <ProgressBar
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/progressBar"
         android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/words"
+       android:layout_above="@+id/terms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="By creating an account, I accept Gula's"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:textColor="@color/White"/>
+
+    <TextView
+        android:layout_marginBottom="10dp"
+        android:id="@+id/terms"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Terms of Service"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textSize="13dp"
+        android:textColor="@color/White"/>
 
 </RelativeLayout>

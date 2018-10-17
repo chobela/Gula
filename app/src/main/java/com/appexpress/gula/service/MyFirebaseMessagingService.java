@@ -56,7 +56,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
 
-
+/*
     @Override
     public boolean zzE(Intent intent) {
 
@@ -75,6 +75,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         return
                 super.zzE(intent);
     }
+    */
 
     private void handleNotification(String message) {
         if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
