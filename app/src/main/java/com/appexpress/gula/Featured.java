@@ -7,19 +7,13 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -35,15 +29,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.appexpress.gula.account.LoginActivity;
 import com.appexpress.gula.util.Config;
-import com.appexpress.gula.util.MenuFragment;
 import com.appexpress.gula.util.NotificationUtils;
 import com.appexpress.gula.util.RecyclerViewAdapter;
 import com.appexpress.gula.util.RecyclerViewMargin;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -425,42 +416,31 @@ public class Featured extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
 
-        int count = getFragmentManager().getBackStackEntryCount();
-
-        if (count == 0) {
-            super.onBackPressed();
-            //additional code
-        } else {
-            getFragmentManager().popBackStack();
-        }
-
-    }
 
     public void hideFragment(){
-        Featured.this.findViewById(R.id.recyclerView).setVisibility(View.VISIBLE);
-        Featured.this.findViewById(R.id.adView).setVisibility(View.VISIBLE);
+      //  Featured.this.findViewById(R.id.recyclerView).setVisibility(View.VISIBLE);
+       // Featured.this.findViewById(R.id.adView).setVisibility(View.VISIBLE);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_down, R.anim.slide_up);
         fragmentTransaction.remove(menuFragment);
         fragmentTransaction.commit();
-        menuButton.setImageResource(R.drawable.ic_menu);
+        menuButton.setImageResource(R.drawable.baseline_menu_white_36);
         isFragmentLoaded = false;
         title.setText("Gula");
     }
     public void loadFragment(){
         FragmentManager fm = getSupportFragmentManager();
-        menuFragment = fm.findFragmentById(R.id.container);
+        menuFragment = fm.findFragmentById(R.id.containerm);
         menuButton.setImageResource(R.drawable.ic_up_arrow);
         if(menuFragment == null){
-            Featured.this.findViewById(R.id.recyclerView).setVisibility(View.GONE);
-            Featured.this.findViewById(R.id.adView).setVisibility(View.GONE);
+           // Featured.this.findViewById(R.id.container).setVisibility(View.GONE);
+           // Featured.this.findViewById(R.id.recyclerView).setVisibility(View.GONE);
+           // Featured.this.findViewById(R.id.adView).setVisibility(View.GONE);
             menuFragment = new MenuFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slide_down, R.anim.slide_up);
-            fragmentTransaction.add(R.id.container,menuFragment);
+            fragmentTransaction.add(R.id.containerm,menuFragment);
             fragmentTransaction.commit();
         }
 

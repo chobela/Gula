@@ -30,7 +30,7 @@
                 android:id="@+id/menu_icon"
                 android:layout_width="50dp"
                 android:layout_height="?attr/actionBarSize"
-                android:src="@drawable/ic_menu"
+                android:src="@drawable/baseline_menu_white_36"
                 android:padding="13dp"
                 android:layout_centerVertical="true"
 
@@ -50,11 +50,11 @@
                 android:id="@+id/search_icon"
                 android:layout_width="50dp"
                 android:layout_height="?attr/actionBarSize"
-                android:src="@android:drawable/ic_menu_search"
+                android:src="@drawable/baseline_search_white_36"
                 android:padding="13dp"
                 android:layout_alignParentRight="true"
-
-                />
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 

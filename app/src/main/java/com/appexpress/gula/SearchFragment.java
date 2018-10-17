@@ -220,6 +220,4 @@ public class SearchFragment extends Fragment {
 
         Log.d(TAG, "getFilters: got filters: \ncity: " + mPrefCity);
     }
-
-
 }

@@ -98,7 +98,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
                         AppCompatActivity activity = (AppCompatActivity) v.getContext();
 
-                        activity.findViewById(R.id.recyclerView).setVisibility(View.GONE);
+                       // activity.findViewById(R.id.recyclerView).setVisibility(View.GONE);
                         FeatureFragment myFragment = new FeatureFragment();
 
                         Bundle args = new Bundle();
