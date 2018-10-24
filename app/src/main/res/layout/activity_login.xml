@@ -5,23 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".account.LoginActivity"
+    tools:context=".LoginActivity"
     android:background="@color/colorPrimary">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="55dp"
         android:paddingLeft="45dp"
         android:paddingRight="45dp"
         >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="75dp"
-
-           android:layout_centerHorizontal="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/full"
+            android:layout_centerHorizontal="true"
             android:id="@+id/logo"/>
 
 
@@ -51,13 +50,26 @@
             android:id="@+id/input_password"
             android:layout_marginTop="15dp"/>
 
+        <com.facebook.login.widget.LoginButton
+            xmlns:facebook="http://schemas.android.com/apk/res-auto"
+            facebook:com_facebook_login_text="Sign in with Facebook"
+            android:layout_below="@+id/logo"
+            android:id="@+id/fblogin_button"
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerHorizontal="true" />
+
 
         <com.google.android.gms.common.SignInButton
-            android:layout_below="@+id/input_password"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/fblogin_button"
             android:id="@+id/sign_in_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:visibility="visible" />
 
         <Button
@@ -78,12 +90,12 @@
             android:visibility="visible"
             android:textAllCaps="false"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="25dp"
             android:text="Sign in with Email"
             android:textColor="#ffffff"
-            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:drawableLeft="@android:drawable/sym_action_email"
             android:id="@+id/emaillogin"
             android:padding="12dp"
             android:background="@color/colorAccent"/>

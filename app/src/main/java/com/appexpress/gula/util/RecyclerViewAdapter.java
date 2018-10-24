@@ -56,7 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         UniversalImageLoader.setImage(deals.get(position).getImage(), holder.imageView);
 
-      //  holder.textViewPrice.setText("K " + mydeals.getPrice());
+        holder.textViewPrice.setText("K" + mydeals.getPrice());
        // holder.textViewTitle.setText(mydeals.getTitle());
         //holder.textViewTown.setText(mydeals.getTown());
 

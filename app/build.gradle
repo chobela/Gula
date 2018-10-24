@@ -79,6 +79,9 @@ dependencies {
     //shortcut badger
     implementation "me.leolin:ShortcutBadger:1.1.22@aar"
 
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:4.+'
+
+
 }
 apply plugin: 'com.google.gms.google-services'

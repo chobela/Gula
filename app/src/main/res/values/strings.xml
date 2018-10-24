@@ -30,6 +30,9 @@
     <string name="field_post_id">post_id</string>
 
     <string name="create"><u>CREATE ACCOUNT</u></string>
+    <string name="facebook_app_id">2112396359089008</string>
+
+    <string name="fb_login_protocol_scheme">fb2112396359089008</string>
 
 
     <string name="title_activity_welcome">Home Screen</string>

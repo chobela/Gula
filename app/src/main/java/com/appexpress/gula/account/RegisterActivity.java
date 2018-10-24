@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.appexpress.gula.LoginActivity;
 import com.appexpress.gula.R;
 import com.appexpress.gula.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;

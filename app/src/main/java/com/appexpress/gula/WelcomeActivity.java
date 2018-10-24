@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.appexpress.gula.account.LoginActivity;
 import com.appexpress.gula.util.PrefManager;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -122,7 +121,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+        startActivity(new Intent(WelcomeActivity.this, Splash.class));
         finish();
     }
 

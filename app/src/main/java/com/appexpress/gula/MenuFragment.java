@@ -15,8 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appexpress.gula.R;
-import com.appexpress.gula.account.LoginActivity;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,6 +36,7 @@ public class MenuFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.slide_menu, container, false);
 
         setupFirebaseListener();
+
 
         advertise = (LinearLayout) rootView.findViewById(R.id.advertise);
         textName = rootView.findViewById(R.id.textViewName);

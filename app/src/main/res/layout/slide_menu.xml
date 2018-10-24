@@ -46,6 +46,7 @@
             </LinearLayout>
 
             <ImageView
+                android:src="@mipmap/ic_launcher"
                 android:id="@+id/imageView"
                 android:layout_width="95dp"
                 android:layout_height="wrap_content"
