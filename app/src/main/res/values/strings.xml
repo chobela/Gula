@@ -8,6 +8,7 @@
     <string name="fragment_watch_list">Watch List</string>
     <string name="fragment_post">Post</string>
     <string name="fragment_account">Account</string>
+    <string name="fragment_send_msg">Message</string>
     <string name="node_posts">posts</string>
     <string name="preferences_city">preferences_city</string>
     <string name="fragment_view_post">Post</string>
@@ -17,6 +18,8 @@
     <string name="node_elasticsearch">elasticsearch</string>
     <!-- Intent extras and Bundle arguments -->
     <string name="arg_post_id">arg_post_id</string>
+
+    <string name="field_messaging_token">token</string>
 
     <!-- Database field names -->
     <string name="admob_app_id">ca-app-pub-4644264986800501~3274565999</string>
@@ -67,5 +70,16 @@
         like Aldus PageMaker including versions of Lorem Ipsum</string>
     <string name="title_activity_featured">Featured</string>
     <string name="title_activity_messages">Messages</string>
+
+    <string name="invitation_title">Gula Classifieds</string>
+    <string name="invitation_message">Hi, I found this really cool app that lets you advertise, sell, and buy goods effortlessly.</string>
+    <string name="invitation_deep_link">https://gula.page.link/android</string>
+    <string name="invitation_custom_image">http://app-express.net/gulalogo.png</string>
+    <string name="invitation_cta">Invite</string>
+
+
+
+
+
 
 </resources>

@@ -114,6 +114,7 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/relLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/relLayout1"
@@ -141,8 +142,24 @@
                 </RelativeLayout>
 
 
+                <Button
+                    android:clickable="true"
+                    android:layout_below="@+id/relLayout2"
+                    android:text="Send message"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/container"
+                android:visibility="gone">
+
+            </FrameLayout>
 
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>

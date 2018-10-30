@@ -78,10 +78,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
     //shortcut badger
     implementation "me.leolin:ShortcutBadger:1.1.22@aar"
-
     //facebook
     implementation 'com.facebook.android:facebook-android-sdk:4.+'
-
+    //dynamic links
+    implementation 'com.google.firebase:firebase-invites:11.8.0'
 
 }
 apply plugin: 'com.google.gms.google-services'

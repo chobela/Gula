@@ -11,15 +11,19 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.appexpress.gula.account.RegisterActivity;
 import com.appexpress.gula.models.Post;
 import com.appexpress.gula.util.UniversalImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,10 +41,12 @@ public class ViewPostFragment extends Fragment {
     //widgets
     private TextView mContactSeller, mTitle, mDescription, mPrice, mLocation, mSavePost;
     private ImageView mClose, mWatchList, mPostImage;
+    private Button mSendMsg;
 
     //vars
     private String mPostId;
     private Post mPost;
+    private FrameLayout mFrameLayout;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +68,8 @@ public class ViewPostFragment extends Fragment {
         mWatchList = (ImageView) view.findViewById(R.id.add_watch_list);
         mPostImage = (ImageView) view.findViewById(R.id.post_image);
         mSavePost = (TextView) view.findViewById(R.id.save_post);
+        mFrameLayout = (FrameLayout) view.findViewById(R.id.container);
+        mSendMsg = (Button) view.findViewById(R.id.msg);
 
         init();
 
@@ -119,6 +127,19 @@ public class ViewPostFragment extends Fragment {
                 });
             }
         }
+
+        mSendMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                //bundle.putString("market", tvMarket.getText().toString());
+              //  bundle.putString("item", itemValue);
+
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         mContactSeller.setOnClickListener(new View.OnClickListener() {
             @Override

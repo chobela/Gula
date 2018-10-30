@@ -1,5 +1,6 @@
 package com.appexpress.gula;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.appexpress.gula.models.Post;
+import com.appexpress.gula.util.Config;
 import com.appexpress.gula.util.RotateBitmap;
 import com.appexpress.gula.util.UniversalImageLoader;
 import com.appexpress.gula.util.Upload;
@@ -27,6 +29,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -213,6 +216,9 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
                 Log.d(TAG, "onSuccess: firebase download url: " + firebaseUri.toString());
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
+                /*SharedPreferences pref = getActivity().getSharedPreferences(Config.SHARED_PREF, 0);
+                String token = pref.getString("regId", null);*/
+
                 String image = firebaseUri.toString();
                 String town= mCity.getText().toString();
                 String email= mContactEmail.getText().toString();
@@ -239,8 +245,6 @@ public class PostFragment extends Fragment implements SelectPhotoDialog.OnPhotoS
                 reference.child(getString(R.string.node_posts))
                         .child(postId)
                         .setValue(post);
-
-
 
                 resetFields();
             }

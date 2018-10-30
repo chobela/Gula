@@ -47,6 +47,15 @@
                 android:text="Gula" />
 
             <ImageView
+                android:id="@+id/invite"
+                android:layout_width="50dp"
+                android:layout_height="?attr/actionBarSize"
+                android:src="@drawable/baseline_person_add_white_36dp"
+                android:padding="13dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/search_icon"/>
+
+            <ImageView
                 android:id="@+id/search_icon"
                 android:layout_width="50dp"
                 android:layout_height="?attr/actionBarSize"

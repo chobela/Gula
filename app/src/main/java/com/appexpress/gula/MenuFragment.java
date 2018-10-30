@@ -58,6 +58,7 @@ public class MenuFragment extends Fragment {
 
                 PostFragment fragment = new  PostFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
+               // transaction.addToBackStack(getString(R.string.fragment_send_msg));
                 transaction.replace(R.id.containerm, fragment);
                 transaction.commit();
             }

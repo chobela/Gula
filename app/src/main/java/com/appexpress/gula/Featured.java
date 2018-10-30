@@ -37,6 +37,11 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.appinvite.AppInviteInvitation;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -46,6 +51,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
@@ -58,7 +64,7 @@ public class Featured extends BaseActivity {
     boolean isFragmentLoaded;
     Fragment menuFragment;
     TextView title;
-    ImageView menuButton, searchButton;
+    ImageView menuButton, searchButton, inviteButton;
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager recyclerViewlayoutManager;
@@ -86,6 +92,8 @@ public class Featured extends BaseActivity {
     public static final String PRICE = "price";
     public static final String TITLE = "title";
 
+    private static final int REQUEST_INVITE =100 ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +102,7 @@ public class Featured extends BaseActivity {
         title = (TextView) findViewById(R.id.title_top);
         menuButton = (ImageView) findViewById(R.id.menu_icon);
         searchButton = (ImageView) findViewById(R.id.search_icon);
+        inviteButton = (ImageView) findViewById(R.id.invite);
 
         title.setText("Gula");
 
@@ -124,6 +133,12 @@ public class Featured extends BaseActivity {
             }
         });
 
+        inviteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onInviteClicked();
+            }
+        });
 
 
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(Featured.this));
@@ -137,6 +152,10 @@ public class Featured extends BaseActivity {
 
         txtRegId = (TextView) findViewById(R.id.txt_reg_id);
         txtMessage = (TextView) findViewById(R.id.txt_push_message);
+
+        //send FCM registration id token to server
+        addNewUser();
+
 
         // initialize the AdMob app
         MobileAds.initialize(this, getString(R.string.admob_app_id));
@@ -189,12 +208,12 @@ public class Featured extends BaseActivity {
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                Toast.makeText(getApplicationContext(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Ad failed to load! error code: " + errorCode, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onAdLeftApplication() {
-                Toast.makeText(getApplicationContext(), "Ad left application!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Ad left application!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -221,6 +240,58 @@ public class Featured extends BaseActivity {
             }
         };
         displayFirebaseRegId();
+    }
+
+    private void onInviteClicked() {
+        Intent intent = new AppInviteInvitation.IntentBuilder(getString(R.string.invitation_title))
+                .setMessage(getString(R.string.invitation_message))
+                .setDeepLink(Uri.parse(getString(R.string.invitation_deep_link)))
+                .setCustomImage(Uri.parse(getString(R.string.invitation_custom_image)))
+                .setCallToActionText(getString(R.string.invitation_cta))
+                .build();
+        startActivityForResult(intent, REQUEST_INVITE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult: requestCode=" + requestCode + ", resultCode=" + resultCode);
+
+        if (requestCode == REQUEST_INVITE) {
+            if (resultCode == RESULT_OK) {
+                String[] ids = AppInviteInvitation.getInvitationIds(resultCode, data);
+                for (String id : ids) {
+                    Log.d(TAG, "onActivityResult: sent invitation " + id);
+                }
+            } else {
+            }
+        }
+    }
+
+
+    public void addNewUser(){
+
+        //add data to the "users" node
+        String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        Log.d(TAG, "addNewUser: Adding new User: \n user_id:" + userid);
+
+        HashMap<String, String> user = new HashMap<>();
+
+        user.put("name", email);
+        user.put("user_id", userid);
+        user.put("token", token);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        //insert into users node
+        reference.child(getString(R.string.node_users))
+                .child(userid)
+                .setValue(user);
+
+
     }
 
 
